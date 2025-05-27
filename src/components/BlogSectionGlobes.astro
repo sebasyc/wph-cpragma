@@ -1,0 +1,14 @@
+---
+const { txtBlogInfoFirst, txtBlogInfoSecond } = Astro.props;
+---
+
+<ul class="list-findings-info">
+    <li class="list-findings-info__item item-findings-info">
+        <img src="/icons/icon2-findings.svg" alt="Libro" loading="eager">
+        <span>{txtBlogInfoFirst}</span>
+    </li>
+    <li class="list-findings-info__item item-findings-info">
+        <img src="/icons/icon3-findings.svg" alt="Equipo" loading="eager">
+        <span>{txtBlogInfoSecond}</span>
+    </li>
+</ul>

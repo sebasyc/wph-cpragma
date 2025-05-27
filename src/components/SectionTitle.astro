@@ -1,0 +1,14 @@
+---
+const { txtTop, title, theme = 'light', classTxtTop, classTitle, txtSubTitle,  } = Astro.props;
+
+const txtTopClass = `txt-top-section ${theme} ${classTxtTop || ''}`;
+const titleSectionClass = `title-section ${theme} ${classTitle || ''}`;
+---
+
+<div class={txtTopClass}><span>{txtTop}</span></div>
+<div class={titleSectionClass}>
+    <h2 set:html={title}></h2>
+    <div class="subtitle">
+        <p set:html={txtSubTitle}></p>
+    </div>
+</div>

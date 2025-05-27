@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  excerpt: string;
+  featuredImage: string
+  slug: string
+}
+
+const { title, excerpt, featuredImage, slug } = Astro.props;
+
+---
+
+<div class="row-insight__col">
+    <div class="box-insight">
+        <span class="box-insight__img">
+            <img src={featuredImage} alt={title}>
+        </span>
+        <span class="box-insight__txt">
+            <h3>{title}</h3>
+            <p set:html={excerpt}></p>
+        </span>
+        <a href={`/post/${slug}`} class="box-insight__btn">Leer más</a>
+    </div>
+</div>

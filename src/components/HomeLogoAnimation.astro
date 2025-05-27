@@ -1,0 +1,69 @@
+<div class="logo-animation">
+    <div class="logo-animation-list">
+        <div class="logo-animation-item">
+            <img src="/images/a-c.svg" alt="c" loading="lazy">
+        </div>
+        <div class="logo-animation-item">
+            <img src="/images/a-compliance.svg" alt="compliance" loading="lazy">
+        </div>
+        <div class="logo-animation-item">
+            <img src="/images/a-cultura.svg" alt="cultura" loading="lazy">
+        </div>
+        <div class="logo-animation-item">
+            <img src="/images/a-desarrollo.svg" alt="desarrollo" loading="lazy">
+        </div>
+        <div class="logo-animation-item">
+            <img src="/images/a-integracion.svg" alt="integracion" loading="lazy">
+        </div>
+        <div class="logo-animation-item">
+            <img src="/images/a-se.svg" alt="se" loading="lazy">
+        </div>
+    </div>
+    <div class="a-pragma">
+        <img src="/images/a-pragma.svg" alt="cpragma" loading="lazy">
+    </div>
+</div>
+
+<script>
+    import $ from 'jquery';
+
+    $(function() {
+            var $slider = $('.logo-animation-list').slick({
+            infinite: true,
+            fade: true,
+            speed: 300,
+            autoplay: true,
+            autoplaySpeed: 1000,
+            cssEase: 'linear',
+            arrows: false,
+            dots: false,
+            adaptiveHeight: false,
+            pauseOnHover: false,
+            pauseOnFocus: false
+        });
+
+        // Función para ajustar el ancho del wrapper
+        function adjustWrapperWidth() {
+            var $activeSlide = $('.slick-active');
+            var imgWidth = $activeSlide.find('img').width();
+            $('.logo-animation-list').css('width', imgWidth + 'px');
+        }
+        
+        // Ajuste inicial después de que Slick se haya inicializado
+        setTimeout(adjustWrapperWidth, 100);
+        
+        // Ajustar el ancho en cada cambio de slide
+        $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            var $nextSlide = $(slick.$slides[nextSlide]);
+            var nextWidth = $nextSlide.find('img').width();
+            $('.logo-animation-list').css('width', nextWidth + 'px');
+        });
+        
+        // Ajuste adicional por si acaso
+        $slider.on('afterChange', adjustWrapperWidth);
+        
+        // Ajustar también cuando se redimensiona la ventana
+        $(window).on('resize', adjustWrapperWidth);
+    });
+    
+</script>

@@ -1,22 +1,45 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { pathname } = Astro.url;
+let pageClass = 'cpragma';
+
+if (pathname.startsWith('/post/')) {
+  pageClass += ' insights-posts';
+} else {
+  if (pathname === '/') {
+    pageClass += ' home';
+  } else {
+    pageClass += ' ' + pathname
+      .slice(1)
+      .replace(/\//g, '-')
+      .replace(/\.html$/, '');
+  }
+}
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<title>cpragma</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content="cpragma" />
+		<meta name="author" content="cpragma" />
+		<meta property="og:url" content="https://cpragma.com" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="cpragma" />
+		<meta property="og:description" content="cpragma" />
+		<meta property="og:image" content="https://cpragma.com/og.jpg" />
+		<meta property="og:locale" content="es_ES" />
 	</head>
-	<body>
+	<body class={pageClass}>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

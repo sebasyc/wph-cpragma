@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+import { getPostInfo, getAllPostsSlugs } from '../../lib/wp'
+
+const slug = (Astro.params as { slug: string }).slug
+if (!slug) return Astro.redirect('/404')
+
+export async function getStaticPaths () {
+    const slugs = await getAllPostsSlugs()
+    return slugs.map((slug: string) => ({ params: { slug } }))
+}
+
+const { title, content } = await getPostInfo(slug)
+---
+
+<Layout>
+    <div class="section-post">
+        <div set:html={content} />
+    </div>
+</Layout>

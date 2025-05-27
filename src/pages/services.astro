@@ -1,0 +1,12 @@
+---
+import ServicesHero from '../components/ServicesHero.astro';
+import ServicesAccordion from '../components/ServicesAccordion.astro';
+import ReactAccordion from '../components/ReactAccordion';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<ServicesHero />
+    <ServicesAccordion />
+    <ReactAccordion client:load />
+</Layout>

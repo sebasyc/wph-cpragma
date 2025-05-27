@@ -1,0 +1,25 @@
+---
+const { theme = 'light', txtGlobeFirst, txtGlobeSecond, txtGlobeThird } = Astro.props;
+const rowGlobeClass = `row-globe ${theme}`;
+---
+
+<div class={rowGlobeClass}>
+    <div class="globe-circle">
+        <img src="/icons/icon-box-globe1.svg" alt="Ampolleta" loading="lazy">
+    </div>
+    <div class="row-globe__txt">
+        <div class="box-globe">
+            <p>{txtGlobeFirst}</p>
+        </div>
+    </div>
+    <div class="row-globe__txt">
+        <div class="box-globe">
+            <p>{txtGlobeSecond}</p>
+        </div>
+    </div>
+    <div class="row-globe__txt">
+        <div class="box-globe">
+            <p>{txtGlobeThird}</p>
+        </div>
+    </div>
+</div>

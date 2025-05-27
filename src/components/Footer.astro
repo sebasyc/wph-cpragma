@@ -1,0 +1,25 @@
+---
+const footerData = {
+    title: "Más que compliance, una <span>cultura de confianza.</span>",
+    buttons: [
+        { text: "Linkedin/cpragma", url: "https://www.linkedin.com/company/cpragma" },
+        { text: "contacto@cpragma.com", url: "mailto:contacto@cpragma.com" },
+        { text: "+56 2 2235 4082", url: "tel:+222354082" }
+    ]
+};
+---
+
+<footer>
+    <div class="container">
+        <h1 set:html={footerData.title}></h1>
+        <ul class="footer-row">
+            {footerData.buttons.map((button) => (
+                <li class="footer-row__btn">
+                    <a href={button.url} class="footer-button" target="_blank" rel="noopener noreferrer">
+                        {button.text}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </div>
+</footer>

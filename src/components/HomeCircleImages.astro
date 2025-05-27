@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import imgCircle from "../assets/images/circle.svg";
+import imgCircleInfo1 from "../assets/images/circle-info1.svg";
+import imgCircleInfo2 from "../assets/images/circle-info2.svg";
+import imgCircleInfo3 from "../assets/images/circle-info3.svg";
+import imgCircleInfo4 from "../assets/images/circle-info4.svg";
+import imgCircleInfo5 from "../assets/images/circle-info5.svg";
+import imgCircleStop from "../assets/images/circle-stop.svg";
+import imgCircleMobile from "../assets/images/circle-strategy-xs.svg";
+---
+
+<div class="row-method__col row-method__col--img">
+    <div class="box-circle-method">
+        <Image src={imgCircle} alt="Circulo de fondo" loading="lazy" />
+        <Image src={imgCircleInfo1} alt="Información circulo 1" class="circle-info circle-info1" loading="lazy" />
+        <Image src={imgCircleInfo2} alt="Información circulo 2" class="circle-info circle-info2" loading="lazy" />
+        <Image src={imgCircleInfo3} alt="Información circulo 3" class="circle-info circle-info3" loading="lazy" />
+        <Image src={imgCircleInfo4} alt="Información circulo 4" class="circle-info circle-info4" loading="lazy" />
+        <Image src={imgCircleInfo5} alt="Información circulo 5" class="circle-info circle-info5" loading="lazy" />
+        <Image src={imgCircleStop} alt="Stop and go" class="circle-stop" loading="lazy" />
+    </div>
+    <Image src={imgCircleMobile} class="circle-method-xs" alt="Información circulo mobile" loading="lazy" />
+</div>

@@ -1,11 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeService from '../components/HomeService.astro';
+import HomeMethod from '../components/HomeMethod.astro';
+import HomeLogoAnimation from '../components/HomeLogoAnimation.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 ---
 
 <Layout>
-	<Welcome />
+	<HomeHero />
+	<HomeLogoAnimation />
+	<HomeService />
+	<HomeMethod />
+	<script>
+		import 'slick-carousel';
+	</script>
 </Layout>

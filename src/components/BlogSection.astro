@@ -1,0 +1,32 @@
+---
+import SectionTitle from '../components/SectionTitle.astro'
+import BlogSectionGlobes from '../components/BlogSectionGlobes.astro'
+import BlogInsightCard from '../components/BlogInsightCard.astro'
+
+import { getPageInfo, getLatestPosts } from '../lib/wp'
+
+const { title, content } = await getPageInfo("Blog")
+const posts = await getLatestPosts({ perPage: 4 })
+---
+<div id="findings" class="section-findings">
+    <div class="container">
+        <div class="row-findings row">
+            <div class="row-findings__col row-findings__col--title">
+                <SectionTitle 
+                    txtTop="(Hallazgos)"
+                    title={title}
+                    txtSubTitle={content}
+                />
+            </div>
+            <div class="row-findings__col row-findings__col--info">
+                <BlogSectionGlobes
+                    txtBlogInfoFirst="Insights jurídicos y tendencias en compliance."
+                    txtBlogInfoSecond="Estrategias para fortalecer la cultura organizacional."
+                />
+            </div>
+        </div>
+        <div class="row-insight row">
+            {posts.map((post: any) => <BlogInsightCard {...post} />)}
+        </div>
+    </div>
+</div>

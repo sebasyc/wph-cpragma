@@ -1,0 +1,54 @@
+---
+import HeaderLogo from '../components/HeaderLogo.astro';
+import HeaderLinkedin from '../components/HeaderLinkedin.astro';
+const menuItems = [
+  { name: 'Quiénes somos', href: '/about', target: '_self' },
+  { name: 'Servicios', href: '/services', target: '_self' },
+  { name: 'Hallazgos', href: '/blog', target: '_self' },
+  { name: 'Hablemos', href: '/contact', target: '_self', isBorder: true },
+];
+---
+
+<header>
+    <div class="pre-header">
+        <div class="container">
+            <div class="btn-customer">
+                <a href="https://compliancepro.cl/" target="_blank">
+                    <span>Ingreso clientes</span>
+                    <img src="/icons/icon-user-c.svg" alt="Ingreso clientes" loading="eager"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="main-header">
+        <div class="container">
+            <div class="row-header">
+                <div class="row-header__col row-header__col--logo">
+                    <a href="/."><HeaderLogo /></a>
+                </div>
+                <div class="row-header__col row-header__col--menu">
+                    <div class="btn-colapse-xs">
+                        <span class="line line--l1"></span>
+                        <span class="line line--l2"></span>
+                        <span class="line line--l3"></span>
+                    </div>
+                    <ul class="nav-menu">
+                        {menuItems.map((item, index) => (
+                            <li class={`nav-menu__item 
+                                ${index === 0 ? 'nav-menu__item--first' : ''} 
+                                ${item.isBorder ? 'nav-menu__item--border' : ''}
+                                menu-item`}>
+                                    <a href={item.href} target={item.target} data-scroll>{item.name}</a>
+                            </li>
+                        ))}
+                        <li class="nav-menu__item nav-menu__item--last menu-item">
+                            <a href="https://www.linkedin.com/company/cpragma" target="_blank">
+                                <HeaderLinkedin />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
