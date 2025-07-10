@@ -1,25 +1,42 @@
 ---
-import SectionTitle from "../components/SectionTitle.astro";
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const text = await getNotionTexts(notionDatabases.contacto);
 ---
 
 <div class="cpragma-contact container">
     <div class="row-contact row">
         <div class="row-contact__col row-contact__col--txt">
-            <SectionTitle
-                txtTop="(Hablemos)"
-                title="Haz que el compliance se convierta en <span>tu ventaja competitiva</span>"
-                theme="dark"
-            />
-            <div class="info-contact row">
-                <div class="info-contact__col">
-                    <h4>Dirección</h4>
-                    <p>Almirante Pastene N°333, oficina 402, Providencia, Región Metropolitana</p>
+            {text.slice().reverse().map((t) => (
+                <div class="txt-top-section dark">
+                    <span>{t.textTop}</span>
                 </div>
-                <div class="info-contact__col">
-                    <a href="mailto:contacto@cpragma.com">contacto@cpragma.com</a>
-                    <a href="tel:56222354082">+56 2 2235 4082</a>
+                <div class="title-section dark">
+                    <h2>{t.title} <span>{t.titlei}</span></h2>
                 </div>
-            </div>
+                <div class="info-contact row">
+                    <div class="info-contact__col info-contact__col--address">
+                        <h4>Dirección</h4>
+                        <div class="address-row">
+                            <div class="address-row__col">
+                                <a href="https://maps.app.goo.gl/sVdsY5CaT74zfQfj6" target="_blank">
+                                    <p>{t.direccionChile}</p>
+                                </a>
+                            </div>
+                            <div class="address-row__col">
+                                <a href="https://maps.app.goo.gl/rxv95NfdzT15g8dM9" target="_blank">
+                                    <p>{t.direccionEspaña}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-contact__col info-contact__col--contact">
+                        <a href="mailto:contacto@cpragma.com">contacto@cpragma.com</a>
+                        <a href="tel:56222354082">+56 2 2235 4082</a>
+                    </div>
+                </div>
+            ))}
         </div>
         <div class="row-contact__col row-contact__col--form">
             <form method="POST" action="/api/send-mail">

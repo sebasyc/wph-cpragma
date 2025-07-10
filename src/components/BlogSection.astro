@@ -6,8 +6,9 @@ import BlogInsightCard from '../components/BlogInsightCard.astro'
 import { getPageInfo, getLatestPosts } from '../lib/wp'
 
 const { title, content } = await getPageInfo("Blog")
-const posts = await getLatestPosts({ perPage: 4 })
+const posts = await getLatestPosts({ perPage: 8 })
 ---
+
 <div id="findings" class="section-findings">
     <div class="container">
         <div class="row-findings row">

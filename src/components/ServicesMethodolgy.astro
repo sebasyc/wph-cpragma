@@ -1,0 +1,29 @@
+---
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const text = await getNotionTexts(notionDatabases.servicios);
+---
+
+<section class="methodology">
+    <div class="container">
+        <div class="methodology-row row">
+            <div class="methodology-row__col methodology-row__col--txt">
+                {text.slice().reverse().map((t) => (
+                <div class="txt-top-section dark">
+                    <span>{t.textTop}</span>
+                </div>
+                <div class="title-section dark">
+                    <h2>{t.title} <span>{t.titlei}</span></h2>
+                    <div class="subtitle">
+                        <p>{t.content}</p>
+                    </div>
+                </div>
+                ))}
+            </div>
+            <div class="methodology-row__col methodology-row__col--img">
+                <img src="/images/line-map-servicios.svg" alt="Fases">
+            </div>
+        </div>
+    </div>
+</section>

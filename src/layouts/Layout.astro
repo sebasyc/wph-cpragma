@@ -3,6 +3,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+import MenuToggle from '../components/MenuToggle.astro'
+
 const { pathname } = Astro.url;
 let pageClass = 'cpragma';
 
@@ -39,7 +41,10 @@ if (pathname.startsWith('/post/')) {
 	</head>
 	<body class={pageClass}>
 		<Header />
-		<slot />
+		<div class="main-content">
+			<slot />
+		</div>
 		<Footer />
+		<MenuToggle />
 	</body>
 </html>

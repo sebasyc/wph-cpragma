@@ -1,11 +1,26 @@
 ---
 const bgServiceHero = '/images/bg-services.webp';
+
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const text = await getNotionTexts(notionDatabases.servicios);
 ---
 
-<div class="service-hero" style={`background-image: url(${bgServiceHero})`}>
-    <div class="container">
-        <div class="service-hero-title">
-            <h1>Impulsamos el crecimiento de tu organización integrando la <span>cultura del compliance</span></h1>
+{text.slice().reverse().map((t) => (
+    <div class="service-hero" style={`background-image: url(${bgServiceHero})`}>
+        <div class="container">
+            <div class="service-hero-title">
+                <h1>{t.herroText} <span>{t.herroTexti}</span></h1>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="service-accordion">
+        <div class="container">
+            <div class="txt-top-section light">
+                <span>{t.textTopServices}</span>
+            </div>
+        </div>
+    </div>
+))}

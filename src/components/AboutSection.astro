@@ -1,5 +1,9 @@
 ---
-import SectionTitle from '../components/SectionTitle.astro';
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const textTop = await getNotionTexts(notionDatabases.nosotrosTxt1);
+const textBottom = await getNotionTexts(notionDatabases.nosotrosTxt2);
 
 const bgBottomAbout = '/images/bg-bottom-about.webp';
 ---
@@ -8,11 +12,18 @@ const bgBottomAbout = '/images/bg-bottom-about.webp';
     <div class="container">
         <div class="row-about row">
             <div class="row-about__col">
-                <SectionTitle
-                    txtTop="(Quiénes somos)"
-                    title="Experiencia que convierte el compliance en una <span>ventaja competitiva.</span>"
-                    txtSubTitle="<strong>Un equipo multidisciplinario que cuenta con una amplia experiencia en consultoría estratégica dirigida a Alta Dirección y Directorios. Las principales áreas de conocimiento son la gestión de riesgos (estratégicos, operacionales, legales, laborales, etc.), la resiliencia (gestión de crisis y continuidad de negocio) y la optimización de procesos.</strong><br> Toda esa experiencia acumulada nos ha permitido elaborar nuestra propia metodología de trabajo, que se fundamenta en interacciones optimizadas con el cliente y en el ciclo de la mejora continua presente en las normas ISO - identificar, analizar, diseñar, ejecutar y medir - aspecto que permite incorporar en la organización nuevos elementos de una manera natural. Además, esa metodología está sustentada por la normativa legal, reglamentaria y jurisprudencial vigente, y soportada por herramientas tecnológicas, también de elaboración propia, que ponemos a disposición de las organizaciones, lo que permite que incorporen nuevas herramientas de gestión de una manera natural."
-                />
+                {textTop.slice().reverse().map((t) => (
+                    <div class="txt-top-section light">
+                        <span>{t.textTop}</span>
+                    </div>
+                    <div class="title-section light">
+                        <h2>{t.title}&nbsp;<span>{t.titlei}</span></h2>
+                        <div class="subtitle">
+                            <p><strong>{t.content1}</strong></p>
+                            <p>{t.content2}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
             <div class="row-about__col">
                 <div class="box-img-cpragma"></div>
@@ -21,19 +32,21 @@ const bgBottomAbout = '/images/bg-bottom-about.webp';
     </div>
 </div>
 
+
 <div class="section-bottom-about" style={`background-image: url(${bgBottomAbout})`}>
     <div class="container">
-        <SectionTitle
-            title="Claridad, estrategia y <span>valor para tu empresa.</span>"
-            theme="dark"
-        />
-        <div class="row row-txt-bottom-about">
-            <div class="row-txt-bottom-about__col">
-                <p>En Cpragma creemos que hacer lo correcto desde el inicio fortalece a las empresas y genera un impacto positivo en la sociedad. Nuestra experiencia nos permite transformar el compliance en una ventaja estratégica, integrándolo de manera natural en la cultura empresarial.</p>
+        {textBottom.slice().reverse().map((t) => (
+            <div class="title-section dark">
+                <h2>{t.title}&nbsp;<span>{t.titlei}</span></h2>
             </div>
-            <div class="row-txt-bottom-about__col">
-                <p>Guiamos con conocimiento y claridad, simplificando lo complejo y adaptándonos a la realidad de cada cliente. No imponemos reglas, <strong>facilitamos decisiones responsables que previenen riesgos y crean empresas más sólidas, transparentes y sostenibles.</strong></p>
-            </div>  
-        </div>
+            <div class="row row-txt-bottom-about">
+                <div class="row-txt-bottom-about__col">
+                    <p>{t.content1}</p>
+                </div>
+                <div class="row-txt-bottom-about__col">
+                    <p>{t.content2}</p>
+                </div>
+            </div>
+        ))}
     </div>
 </div>

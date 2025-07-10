@@ -1,0 +1,29 @@
+---
+import { useEffect } from 'react';
+---
+
+<script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.querySelector(".btn-colapse-xs");
+        const navMenu = document.querySelector(".nav-menu");
+        const mainContent = document.querySelector(".main-content");
+        const body = document.body;
+    
+        btn?.addEventListener("click", () => {
+            btn.classList.toggle("open");
+            navMenu?.classList.toggle("visible");
+            mainContent?.classList.toggle("blur");
+            body.classList.toggle("open-menu");
+        });
+        document.querySelectorAll(".nav-menu li a").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 991) {
+                    btn?.classList.toggle("open");
+                    navMenu?.classList.remove("visible");
+                    mainContent?.classList.toggle("blur");
+                    body.classList.toggle("open-menu");
+                }
+            });
+        });
+    });
+</script>
