@@ -1,32 +1,41 @@
 ---
-import SectionTitle from '../components/SectionTitle.astro';
 import SectionGlobes from '../components/HomeSectionGlobes.astro';
 import SectionCircles from '../components/HomeCircleImages.astro';
+
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const text = await getNotionTexts(notionDatabases.homeMetodologia);
 ---
 
 <div class="section-method">
-    <div class="container">
-        <div class="row-method row">
-            <div class="row-method__col row-method__col--title">
+    {text.slice().reverse().map((t) => (
+        <div class="container">
+            <div class="row-method row">
+                <div class="row-method__col row-method__col--title">
 
-                <SectionTitle
-                    theme="dark"
-                    txtTop="(Metodología)"
-                    title="El compliance <span>no es estatico</span>"
-                    txtSubTitle="Aplicamos una metodología propia que se adapta a la realidad de cada organización, con un enfoque de cumplimiento basado en la estrategia, la anticipación, la normativa legal y jurisprudencial vigente, y en los mas altos estándares en gestión de riesgos."
-                />
+                    <div class="txt-top-section dark">
+                        <span>{t.textTop}</span>
+                    </div>
+                    <div class="title-section dark">
+                        <h2>{t.title} <span>{t.titlei}</span></h2>
+                        <div class="subtitle">
+                            <p>{t.content}</p>
+                        </div>
+                    </div>
 
+                </div>
+                <SectionCircles />
             </div>
-            <SectionCircles />
+
+            <SectionGlobes
+                theme="dark"
+                txtGlobeFirst={t.globe1}
+                txtGlobeSecond={t.globe2}
+                txtGlobeThird={t.globe3}
+            />
+
         </div>
-
-        <SectionGlobes
-            theme="dark"
-            txtGlobeFirst="Diagnóstico y diseño del sistema de compliance."
-            txtGlobeSecond="Implementación práctica con acompañamiento estratégico."
-            txtGlobeThird="Evaluación y mejora continua para integración real."
-        />
-
-    </div>
+    ))}
 </div>
 

@@ -1,32 +1,42 @@
 ---
-import SectionTitle from '../components/SectionTitle.astro';
 import SectionGlobes from '../components/HomeSectionGlobes.astro';
+
+import { getNotionTexts } from '../lib/notion';
+import { notionDatabases } from '../lib/notionConfig';
+
+const text = await getNotionTexts(notionDatabases.homeServicios);
 
 const bgC = '/images/bg-c.svg';
 ---
 
 <div id="service" class="section-service" style={`background-image: url(${bgC})`}>
-    <div class="container">
-
-        <SectionTitle
-            txtTop="(Servicios)"
-            title="Hacemos del <span>cumplimiento un hábito,</span> no una obligación"
-        />
-
-        <div class="service-txt-row row">
-            <div class="service-txt-row__col">
-                <p>No creemos en reglas impuestas desde afuera, sino en normas que fortalecen desde adentro. Cuando el compliance se vive como un hábito, se convierte en un motor de confianza para equipos, clientes y socios.</p>
+    {text.slice().reverse().map((t) => (
+        <div class="container">
+            <div class="txt-top-section light">
+                <span>{t.textTop}</span>
             </div>
-            <div class="service-txt-row__col">
-                <p>En Cpragma, lo integramos de manera natural en cada decisión y proceso, transformándolo en una ventaja competitiva para tu organización.</p>
+            <div class="title-section light">
+                <h2>
+                    {t.title}
+                    <span>{t.titlei}</span>
+                    {t.titleLast}
+                </h2>
             </div>
+            <div class="service-txt-row row">
+                <div class="service-txt-row__col">
+                    <p>{t.content1}</p>
+                </div>
+                <div class="service-txt-row__col">
+                    <p>{t.content2}</p>
+                </div>
+            </div>
+
+            <SectionGlobes
+                txtGlobeFirst={t.globe1}
+                txtGlobeSecond={t.globe2}
+                txtGlobeThird={t.globe3} 
+            />
+
         </div>
-
-        <SectionGlobes
-            txtGlobeFirst="Asesoría estratégica basada en expertise legal y empresarial."
-            txtGlobeSecond="Diseño e implementación del  sistema de compliance."
-            txtGlobeThird="Evaluación y seguimiento de programas de cumplimiento." 
-        />
-
-    </div>
+    ))}
 </div>

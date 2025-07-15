@@ -392,7 +392,7 @@ footer {
     text-align: center;
     background-color: var(--primary-color);
     @media (max-width: 991px) {
-        padding: 3em 15px;
+        padding: 2em 0;
     }
     h1 {
         font-size: 39px;
@@ -413,6 +413,9 @@ footer {
         flex-wrap: wrap;
     }
     .footer-row__btn {
+        @media (max-width: 991px) {
+            width: 100%;
+        }
         a {
             display: flex;
             align-items: center;

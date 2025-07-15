@@ -10,8 +10,14 @@ export async function getNotionTexts(databaseId: string) {
     return response.results.map((page: any) => ({
         id: page.id,
 
+        titleLast: page.properties.TitleLast?.rich_text?.[0]?.plain_text || '',
+
         textTop: page.properties.TopText?.rich_text?.[0]?.plain_text || '',
         textTopServices: page.properties.TopTextServices?.rich_text?.[0]?.plain_text || '',
+
+        globe1: page.properties.Globe1?.rich_text?.[0]?.plain_text || '',
+        globe2: page.properties.Globe2?.rich_text?.[0]?.plain_text || '',
+        globe3: page.properties.Globe3?.rich_text?.[0]?.plain_text || '',
 
         herroText: page.properties.HeroText?.rich_text?.[0]?.plain_text || '',
         herroTexti: page.properties.HeroTexti?.rich_text?.[0]?.plain_text || '',
