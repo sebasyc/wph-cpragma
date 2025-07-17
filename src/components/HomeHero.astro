@@ -19,7 +19,27 @@ const bgHero = '/images/bg-cpragma.webp';
             ))}
         </div>
     </div>
-    <a href="#service" data-scroll class="hero-bg__btn-down">
+    <a href="#service" data-scroll class="hero-bg__btn-down scroll-link">
         <img src="/icons/btn-down.svg" alt="Srcroll down" />
     </a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault()
+                const targetId = link.getAttribute('href')?.substring(1);
+                if (typeof targetId === 'string') {
+                    const targetElement = document.getElementById(targetId)
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                        })
+                    }
+                }
+                history.pushState("", document.title, window.location.pathname + window.location.search)
+            })
+        })
+    })
+</script>

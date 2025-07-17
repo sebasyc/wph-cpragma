@@ -1,0 +1,22 @@
+---
+let isLoading = true;
+---
+
+<div id="loader" class="loader-container" aria-live="polite" aria-busy={isLoading}>
+    <img class="icon-p1" src="/icons/icon-load1.svg" alt="Parentesis 1 logo cpragma">
+    <img class="animate-c" src="/icons/icon-load-c.svg" alt="C cpragma">
+    <img class="icon-p2" src="/icons/icon-load2.svg" alt="Parentesis 2 logo cpragma">
+</div>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.classList.add('close-loader')
+
+            loader.addEventListener('transitionend', () => {
+                loader.remove();
+            });
+        }
+    })
+</script>

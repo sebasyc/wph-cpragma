@@ -1,4 +1,5 @@
 ---
+import Loader from '../components/Loader.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -40,6 +41,7 @@ if (pathname.startsWith('/post/')) {
 		<meta property="og:locale" content="es_ES" />
 	</head>
 	<body class={pageClass}>
+		<Loader />
 		<Header />
 		<div class="main-content">
 			<slot />
