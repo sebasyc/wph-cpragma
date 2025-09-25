@@ -789,7 +789,7 @@ footer {
         }
         .title-section {
             width: auto;
-            &__subhead {
+            :is(__subhead) {
                 width: 90%;
             }
         }
