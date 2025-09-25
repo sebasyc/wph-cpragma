@@ -565,6 +565,7 @@ footer {
     margin: 2em 0 0;
     p {
         font-size: 20px;
+        text-align: justify;
         @media (max-width: 1199px) {
             font-size: 18px;
         }
@@ -777,6 +778,9 @@ footer {
     }
     .row-about {
         align-items: center;
+        p {
+            text-align: justify;
+        }
     }
     .row-about__col {
         width: 50%;
@@ -826,6 +830,7 @@ footer {
         width: 50%;
         p {
             font-size: 20px;
+            text-align: justify;
             color: var(--light-txt-color);
         }
     }
@@ -936,6 +941,7 @@ footer {
             border: 1px solid var(--secondary-color);
             border-radius: 20px;
             margin-top: -55px;
+            text-align: justify;
             p {
                 font-size: 20px;
                 color: var(--secondary-color);

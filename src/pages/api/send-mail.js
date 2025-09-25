@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-const recipientEmail = 'avergara@cpragma.com'; // Reemplaza con tu dirección de correo
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const recipientEmail = 'avergara@cpragma.com';
 
 export const prerender = false;
  
@@ -21,14 +22,13 @@ export async function POST({ request }) {
     }
     
     const { data, error } = await resend.emails.send({
-        from: 'cpragma <onboarding@resend.dev>', // Reemplaza con tu remitente verificado en Resend
+        from: 'cpragma <onboarding@resend.dev>',
         to: [recipientEmail],
         subject: `Nuevo mensaje de contacto desde tu sitio web`,
         html: `
         <p><strong>Nombre:</strong> ${nombre}</p>
         ${empresa ? `<p><strong>Empresa:</strong> ${empresa}</p>` : ''}
         ${telefono ? `<p><strong>Teléfono:</strong> ${telefono}</p>` : ''}
-        <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Mensaje:</strong></p>
         <p>${mensaje}</p>`,

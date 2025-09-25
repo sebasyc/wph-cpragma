@@ -1,4 +1,4 @@
-const domain = import.meta.env.WP_DOMAIN
+const domain = process.env.WP_DOMAIN ?? "http://localhost:8881"
 const apiUrl = `${domain}/wp-json/wp/v2`
 
 export const getPageInfo = async (slug: string) => {

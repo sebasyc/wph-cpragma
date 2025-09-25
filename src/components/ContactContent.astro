@@ -39,7 +39,7 @@ const text = await getNotionTexts(notionDatabases.contacto);
             ))}
         </div>
         <div class="row-contact__col row-contact__col--form">
-            <form method="POST" action="/api/send-mail">
+            <form id="contactForm">
                 <div class="box-input">
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
                 </div>
@@ -58,3 +58,31 @@ const text = await getNotionTexts(notionDatabases.contacto);
         </div>
     </div>
 </div>
+
+<script>
+    const form = document.getElementById("contactForm") as HTMLFormElement | null;
+    
+    form?.addEventListener("submit", async (e: SubmitEvent) => {
+        e.preventDefault();
+        const target = e.target as HTMLFormElement;
+        const formData = new FormData(target);
+        
+        try {
+            const res = await fetch("/api/send-mail", {
+                method: "POST",
+                body: formData,
+            });
+            
+            const data = await res.json();
+            
+            if (res.ok) {
+                alert("✅ Mensaje enviado correctamente");
+                target.reset();
+            } else {
+                alert("❌ " + (data.error || "Error al enviar"));
+            }
+        } catch (err) {
+            alert("❌ Hubo un error de conexión");
+        }
+    });
+</script>
