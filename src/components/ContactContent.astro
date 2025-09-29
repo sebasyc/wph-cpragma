@@ -39,50 +39,68 @@ const text = await getNotionTexts(notionDatabases.contacto);
             ))}
         </div>
         <div class="row-contact__col row-contact__col--form">
-            <form id="contactForm">
+            <form id="contact-form" action="https://formspree.io/f/xdkweadq" method="POST">
+                <input type="hidden" name="_subject" value="🌐 📩 cpragma.com, contacto de Cliente desde" />
                 <div class="box-input">
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                    <input type="text" name="nombre" placeholder="Nombre" required>
                 </div>
                 <div class="box-input">
-                    <input type="text" id="empresa" name="empresa" placeholder="Empresa" required>
+                    <input type="text" name="empresa" placeholder="Empresa" required>
                 </div>
                 <div class="group-input">
-                    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+                    <input type="tel" name="telefono" placeholder="Teléfono" required>
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="box-input">
-                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
+                    <textarea name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
                 </div>
+                <p id="form-message" class="msg-form"></p>
                 <button class="btn-form" type="submit">Enviar</button>
             </form>
         </div>
     </div>
 </div>
 
-<script>
-    const form = document.getElementById("contactForm") as HTMLFormElement | null;
-    
-    form?.addEventListener("submit", async (e: SubmitEvent) => {
-        e.preventDefault();
-        const target = e.target as HTMLFormElement;
-        const formData = new FormData(target);
+<script type="module">
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdkweadq";
+
+  const form = document.getElementById("contact-form");
+  const messageEl = document.getElementById("form-message");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      messageEl.style.color = "red";
+      messageEl.textContent = "Enviando...";
+
+      try {
+        const formData = new FormData(form);
         
-        try {
-            const res = await fetch("/api/send-mail", {
-                method: "POST",
-                body: formData,
-            });
-            
-            const data = await res.json();
-            
-            if (res.ok) {
-                alert("✅ Mensaje enviado correctamente");
-                target.reset();
-            } else {
-                alert("❌ " + (data.error || "Error al enviar"));
-            }
-        } catch (err) {
-            alert("❌ Hubo un error de conexión");
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          body: formData,
+          headers: {
+             'Accept': 'application/json' 
+          }
+        });
+
+        if (response.ok) {
+          messageEl.style.color = "#243F3B";
+          messageEl.textContent = "Mensaje enviado correctamente ✅";
+          form.reset();
+        } else {
+          const errorData = await response.json();
+          const errorMessage = errorData.error || "Ocurrió un error con el servicio de formularios.";
+
+          messageEl.style.color = "tomato";
+          messageEl.textContent = errorMessage;
         }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+        messageEl.style.color = "red";
+        messageEl.textContent = "Error de conexión. Revisa tu red.";
+      }
     });
+  }
 </script>
