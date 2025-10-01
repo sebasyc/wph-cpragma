@@ -1353,6 +1353,7 @@ footer {
         }
     }
     form {
+        position: relative;
         width: 90%;
         margin: 0 auto;
         padding: 60px;
@@ -1461,7 +1462,23 @@ footer {
     }
 }
 
-.msg-form {
+#form-message {
     margin: 0;
+    padding: .5em;
+    border-radius: 50px;
+    color: white;
+    text-align: center;
     font-weight: 700;
+    &.msg-sending {
+        background-color: #0080FF;
+        box-shadow: 0 0 0 5px rgba(0, 128, 255, .5);
+    }
+    &.msg-send {
+        background-color: #00aa00;
+        box-shadow: 0 0 0 5px rgba(0, 170, 0, .5);
+    }
+    &.msg-error {
+        background-color: tomato;
+        box-shadow: 0 0 0 5px rgba(255, 99, 71, .5);
+    }
 }

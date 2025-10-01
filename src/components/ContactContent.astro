@@ -39,8 +39,11 @@ const text = await getNotionTexts(notionDatabases.contacto);
             ))}
         </div>
         <div class="row-contact__col row-contact__col--form">
-            <form id="contact-form" action="https://formspree.io/f/xdkweadq" method="POST">
-                <input type="hidden" name="_subject" value="🌐 📩 cpragma.com, contacto de Cliente desde" />
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="62d2d897-309e-4f14-9481-1dc2994e177d">
+                <input type="hidden" name="subject" value="Nuevo mensaje cpragma.com">
+                <input type="hidden" name="from_name" value="cpragma.com">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
                 <div class="box-input">
                     <input type="text" name="nombre" placeholder="Nombre" required>
                 </div>
@@ -62,7 +65,7 @@ const text = await getNotionTexts(notionDatabases.contacto);
 </div>
 
 <script type="module">
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdkweadq";
+  const FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
   const form = document.getElementById("contact-form");
   const messageEl = document.getElementById("form-message");
@@ -70,14 +73,13 @@ const text = await getNotionTexts(notionDatabases.contacto);
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      messageEl.style.color = "red";
+      messageEl.className = "msg-sending"
       messageEl.textContent = "Enviando...";
 
       try {
         const formData = new FormData(form);
         
-        const response = await fetch(FORMSPREE_ENDPOINT, {
+        const response = await fetch(FORMS_ENDPOINT, {
           method: "POST",
           body: formData,
           headers: {
@@ -86,19 +88,18 @@ const text = await getNotionTexts(notionDatabases.contacto);
         });
 
         if (response.ok) {
-          messageEl.style.color = "#243F3B";
-          messageEl.textContent = "Mensaje enviado correctamente ✅";
+          messageEl.className = "msg-send"
+          messageEl.textContent = "¡Formulario enviado con éxito! Gracias por contactarnos. Responderemos a tu mensaje lo antes posible.";
           form.reset();
         } else {
           const errorData = await response.json();
           const errorMessage = errorData.error || "Ocurrió un error con el servicio de formularios.";
-
-          messageEl.style.color = "tomato";
+          messageEl.className = "msg-error"
           messageEl.textContent = errorMessage;
         }
       } catch (error) {
         console.error("Error en la solicitud:", error);
-        messageEl.style.color = "red";
+        messageEl.className = "msg-error"
         messageEl.textContent = "Error de conexión. Revisa tu red.";
       }
     });
